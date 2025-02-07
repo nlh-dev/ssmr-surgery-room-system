@@ -1,5 +1,5 @@
 <nav class="fixed left-0 top-0 z-50 w-full bg-gray-900 border-gray-200 ">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <div class="w-full flex flex-wrap items-center justify-between p-4">
     <a href="<?= APPURL?>dashboard/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="<?= APPURL ?>app/views/images/ssmr-2.png" class="h-8" alt="Flowbite Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Quirofano</span>
@@ -10,7 +10,7 @@
         <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
       </button>
       <!-- Dropdown menu -->
-      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+      <div class="justify-end z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
         <div class="px-4 py-3">
           <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
           <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
