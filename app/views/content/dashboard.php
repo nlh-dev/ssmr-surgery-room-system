@@ -1,7 +1,7 @@
 <div class="p-4">
     <div class="p-4 mt-14">
         <!-- HOME BREADCRUMB -->
-        <?php require_once "./app/views/components/dashboardBreadcrumb.php"; ?>
+        <?php require_once "./app/views/components/breadcrumbs/dashboardBreadcrumb.php"; ?>
         <hr class="my-4 text-gray-300">
 
         <div class="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 my-4">
@@ -63,7 +63,7 @@
 
         </div>
 
-        <?php require_once "./app/views/components/dashboardAdminBreadcrumb.php"; ?>
+        <?php require_once "./app/views/components/breadcrumbs/dashboardAdminBreadcrumb.php"; ?>
         <hr class="my-4 text-gray-300">
         <div class="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 my-4">
             <div class="p-6 bg-gray-800 rounded-lg hover:bg-gray-900 transition duration-100">

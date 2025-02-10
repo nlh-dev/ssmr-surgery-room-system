@@ -1,18 +1,18 @@
 <div class="p-4">
     <div class="p-4 mt-14">
         <!-- HOME BREADCRUMB -->
-        <?php require_once "./app/views/components/patientsBreadcrumb.php"; ?>
+        <?php require_once "./app/views/components/breadcrumbs/patientsBreadcrumb.php"; ?>
         <hr class="my-4 text-gray-300">
 
         <div class="w-full flex items-center justify-end my-2">
-            <a href="#" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-gray-900 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center transition duration-100">
+            <button data-modal-target="addPatientsModal" data-modal-toggle="addPatientsModal" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-gray-900 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center transition duration-100">
                 <svg class="w-5 h-5 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Zm2 0V2h7a2 2 0 0 1 2 2v6.41A7.5 7.5 0 1 0 10.5 22H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd" />
                     <path fill-rule="evenodd" d="M9 16a6 6 0 1 1 12 0 6 6 0 0 1-12 0Zm6-3a1 1 0 0 1 1 1v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 1 1 0-2h1v-1a1 1 0 0 1 1-1Z" clip-rule="evenodd" />
                 </svg>
-
                 Añadir Paciente
-            </a>
+            </button>
+            <?php require_once "./app/views/components/modals/AddPatientsModal.php";?>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-white">
@@ -20,32 +20,36 @@
                     <tr>
                         <th scope="col" class="px-6 py-3">Nombre del Paciente</th>
                         <th scope="col" class="px-6 py-3">Edad</th>
-                        <th scope="col" class="px-6 py-3">Hora de Cirugía</th>
+                        <th scope="col" class="px-6 py-3">Fecha y Hora de Cirugía</th>
                         <th scope="col" class="px-6 py-3">Sala</th>
                         <th scope="col" class="px-6 py-3">Médico</th>
                         <th scope="col" class="px-6 py-3">Diagnostico</th>
-                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3">Estado</th>
+                        <th scope="col" class="px-6 py-3 sr-only">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="bg-white border-b text-gray-900 border-gray-200 text-center">
                         <th class="px-6 py-4 font-medium whitespace-nowrap">
-                            Apple MacBook Pro 17"
+                            Hector Navarro
                         </th>
                         <td class="px-6 py-4">
-                            Silver
+                            25 Años
                         </td>
                         <td class="px-6 py-4">
-                            Laptop
+                            10/02/2025 - 12:00PM
                         </td>
                         <td class="px-6 py-4">
-                            $2999
+                            #1
                         </td>
                         <td class="px-6 py-4">
-                            $2999
+                            Juan Carlos Bozo
                         </td>
                         <td class="px-6 py-4">
-                            $2999
+                            Hernia Umbilical
+                        </td>
+                        <td class="px-6 py-4">
+                        <span class="bg-yellow-500 text-gray-900 text-xs font-bold me-2 px-2.5 py-0.5 rounded-sm">En Espera</span>
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center justify-center">

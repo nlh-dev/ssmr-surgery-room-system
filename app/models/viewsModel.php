@@ -11,7 +11,7 @@
                 "edit-users",
                 "patients",
                 "previous-patients",
-                "add-patients",
+                "addpatients",
                 "edit-patients",
                 "doctors",
                 "add-doctors",

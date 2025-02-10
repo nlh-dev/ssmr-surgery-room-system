@@ -32,6 +32,6 @@ if (isset($_GET['views'])) {
         }
 
         require_once "./app/views/includes/scripts.php";
-    ?>
+        ?>
 </body>
 </html>
