@@ -19,7 +19,7 @@
             use app\controllers\patientsController;
             $instancePatients = new patientsController();
 
-            echo $instancePatients -> patientsListController($url[1], 5, $url[0], "");
+            echo $instancePatients -> patientsListController($url[1], 10, $url[0], "");
         
         ?>
 
