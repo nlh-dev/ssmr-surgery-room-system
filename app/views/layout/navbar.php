@@ -1,4 +1,4 @@
-<nav class="fixed left-0 top-0 z-50 w-full bg-gray-900 border-gray-200 ">
+<nav class="fixed left-0 top-0 z-0 w-full bg-gray-900 border-gray-200">
   <div class="w-full flex flex-wrap items-center justify-between p-4">
     <a href="<?= APPURL ?>dashboard/" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="<?= APPURL ?>app/views/images/ssmr-2.png" class="h-8" alt="Flowbite Logo" />

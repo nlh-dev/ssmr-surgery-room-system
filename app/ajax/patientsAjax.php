@@ -9,8 +9,24 @@
         
         $instancePatients = new patientsController();
 
-        if ($_POST['patientsModule'] == "addPatient") {
+        if ($_POST['patientsModule'] == "addPatients") {
             echo $instancePatients -> addPatientsController();
+        }
+        
+        if ($_POST['patientsModule'] == "deletePatients") {
+            echo $instancePatients -> deletePatientsController();
+        }
+        
+        if ($_POST['patientsModule'] == "updatePatients") {
+            echo $instancePatients -> updatePatientsController();
+        }
+        
+        if ($_POST['patientsModule'] == "updateDischargedPatients") {
+            echo $instancePatients -> updateDischargedPatientsController();
+        }
+        
+        if ($_POST['patientsModule'] == "dischargePatients") {
+            echo $instancePatients -> dischargePatiensController();
         }
         
     } else {

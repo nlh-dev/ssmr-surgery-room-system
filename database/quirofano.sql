@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-02-2025 a las 19:39:21
+-- Tiempo de generación: 11-02-2025 a las 20:36:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -84,7 +84,9 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`patient_ID`, `patient_fullName`, `patient_yearsOld`, `patient_sugeryDate`, `patient_surgeryTime`, `patient_surgeryRoom`, `patient_doctor_ID`, `patient_diagnosis_ID`, `patient_surgeryState_ID`, `patient_isDischarged`) VALUES
-(1, 'HECTOR NAVARRO', 25, '10/02/2025', '15:35:00', 1, 2, 2, 1, 0);
+(12, 'HECTOR LUIS NAVARRO', 30, '11/02/2025', '10:00:00', 3, 2, 2, 4, 1),
+(14, 'HECTOR NAVARRO', 25, '11/02/2025', '13:00:00', 1, 2, 2, 3, 0),
+(15, 'HECTOR NAVARRO', 27, '11/02/2025', '10:10:00', 5, 2, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -104,7 +106,8 @@ CREATE TABLE `patient_states` (
 INSERT INTO `patient_states` (`patientsState_ID`, `patientsState_Name`) VALUES
 (1, 'En Espera'),
 (2, 'En Cirugía'),
-(3, 'En Recuperación');
+(3, 'En Recuperación'),
+(4, 'Dado de Alta');
 
 -- --------------------------------------------------------
 
@@ -205,13 +208,13 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT de la tabla `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `patient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `patient_states`
 --
 ALTER TABLE `patient_states`
-  MODIFY `patientsState_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `patientsState_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`

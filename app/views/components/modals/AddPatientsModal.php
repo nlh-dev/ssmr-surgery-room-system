@@ -1,11 +1,11 @@
 <?php
 
-    use app\controllers\patientsController;
+use app\controllers\patientsController;
 
-    $patients = new patientsController();
-    $showPatientStates = $patients->getPatientStatesController();
-    $showDiagnosis = $patients -> getDiagnosisController();
-    $showDoctors = $patients -> getDoctorsController();
+$patients = new patientsController();
+$showPatientStates = $patients->getPatientStatesController();
+$showDiagnosis = $patients->getDiagnosisController();
+$showDoctors = $patients->getDoctorsController();
 ?>
 
 <!-- Large Modal -->
@@ -27,8 +27,8 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="<?= APPURL ?>app/ajax/patientsAjax.php" class="AjaxForm" method="POST">
-                <input type="hidden" name="patientsModule" id="patientsModule" value="addPatient">
+            <form action="<?= APPURL ?>app/ajax/patientsAjax.php" class="AjaxForm" method="POST" autocomplete="OFF">
+                <input type="hidden" name="patientsModule" id="patientsModule" value="addPatients">
                 <div class="p-4 md:p-5 space-y-4 bg-white grid grid-cols-5 gap-5">
                     <div class="col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Nombre del Paciente</label>
@@ -56,14 +56,15 @@
 
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Fecha de Cirugía</label>
-                        <div class="relative my-2">
-                            <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="relative max-w-sm">
+                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                 </svg>
                             </div>
-                            <input id="surgeryDate" name="surgeryDate" datepicker datepicker-buttons datepicker-autoselect-today datepicker-autohide datepicker-format="dd/mm/yyyy" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Inserte....">
+                            <input id="surgeryDate" name="surgeryDate" datepicker datepicker-buttons datepicker-autoselect-today datepicker-autohide type="text" datepicker-format="dd/mm/yyyy" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5" placeholder="Inserte....">
                         </div>
+
                     </div>
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Hora de Cirugía</label>
@@ -73,7 +74,7 @@
                                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="time" id="surgeryTime" name="surgeryTime" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" min="09:00" max="18:00"/>
+                            <input type="time" id="surgeryTime" name="surgeryTime" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
                         </div>
                     </div>
 
@@ -81,9 +82,9 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">Doctor a cargo de Cirugía</label>
                         <select id="surgeryDoctor" name="surgeryDoctor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option selected>Seleccione....</option>
-                            <?php foreach ($showDoctors as $key => $showDoctorsValue) {?>
-                                <option value="<?= $showDoctorsValue['doctor_ID']?>"><?= $showDoctorsValue['doctor_firstName']?> <?= $showDoctorsValue['doctor_lastName']?></option>
-                            <?php }?>
+                            <?php foreach ($showDoctors as $key => $showDoctorsValue) { ?>
+                                <option value="<?= $showDoctorsValue['doctor_ID'] ?>"><?= $showDoctorsValue['doctor_firstName'] ?> <?= $showDoctorsValue['doctor_lastName'] ?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -91,9 +92,9 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">Diagnóstico del Paciente</label>
                         <select id="surgeryDiagnosis" name="surgeryDiagnosis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option selected value="">Seleccione....</option>
-                            <?php foreach ($showDiagnosis as $key => $showDiagnosisValue) {?>
-                                <option value="<?= $showDiagnosisValue['diagnosis_ID']?>"><?= $showDiagnosisValue['diagnosis_TypeName']?></option>
-                            <?php }?>
+                            <?php foreach ($showDiagnosis as $key => $showDiagnosisValue) { ?>
+                                <option value="<?= $showDiagnosisValue['diagnosis_ID'] ?>"><?= $showDiagnosisValue['diagnosis_TypeName'] ?></option>
+                            <?php } ?>
                         </select>
                     </div>
 
@@ -114,8 +115,10 @@
                         <label class="block mb-2 text-sm font-medium text-gray-900">Estado del Paciente</label>
                         <select id="patientState" name="patientState" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option selected value="">Seleccione....</option>
-                            <?php foreach ($showPatientStates as $key => $patientStatesValue) { ?>
-                                <option value="<?= $patientStatesValue['patientsState_ID'] ?>"><?= $patientStatesValue['patientsState_Name'] ?></option>
+                            <?php foreach ($showPatientStates as $key => $patientStatesValue) { 
+                                if ($patientStatesValue['patientsState_ID'] != 4) { ?>
+                                    <option value="<?= $patientStatesValue['patientsState_ID'] ?>"><?= $patientStatesValue['patientsState_Name'] ?></option>
+                                <?php } ?>
                             <?php } ?>
                         </select>
                     </div>

@@ -7,16 +7,18 @@
             $viewsList = [
                 "dashboard",
                 "users",
-                "add-users",
-                "edit-users",
+                "addUsers",
+                "editUsers",
                 "patients",
-                "previous-patients",
-                "addpatients",
-                "edit-patients",
+                "editPatients",
+                "editDischargedPatients",
+                "previousPatients",
                 "doctors",
-                "add-doctors",
+                "addDoctors",
+                "editDoctors",
                 "diagnosis",
-                "add-diagnosis",
+                "addDiagnosis",
+                "editDiagnosis",
             ];
 
             if (in_array($obtainViews, $viewsList)) {

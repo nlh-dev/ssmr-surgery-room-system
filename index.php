@@ -20,6 +20,10 @@ if (isset($_GET['views'])) {
 <body>
     <?php
         use app\controllers\viewsController;
+        use app\controllers\patientsController;
+
+        $instacePatients = new patientsController();
+
         $viewsController = new viewsController();
         $obtainViews = $viewsController->obtainViewsController($url[0]);
 

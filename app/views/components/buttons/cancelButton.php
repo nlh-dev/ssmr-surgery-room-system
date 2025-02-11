@@ -4,3 +4,12 @@
     </svg>
     Cancelar
 </button>
+
+<script type="text/javascript">
+    let buttonBack = document.querySelector(".buttonBack");
+
+    buttonBack.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.history.back();
+    });
+</script>
