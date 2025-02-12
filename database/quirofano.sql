@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-02-2025 a las 20:36:06
+-- Tiempo de generación: 12-02-2025 a las 20:48:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,16 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `diagnosis` (
   `diagnosis_ID` int(11) NOT NULL,
-  `diagnosis_TypeName` text NOT NULL
+  `diagnosis_TypeName` text NOT NULL,
+  `diagnosis_creationDateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `diagnosis`
---
-
-INSERT INTO `diagnosis` (`diagnosis_ID`, `diagnosis_TypeName`) VALUES
-(1, 'Hernia Umbilical'),
-(2, 'Cirugia General');
 
 -- --------------------------------------------------------
 
@@ -49,16 +42,9 @@ INSERT INTO `diagnosis` (`diagnosis_ID`, `diagnosis_TypeName`) VALUES
 CREATE TABLE `doctors` (
   `doctor_ID` int(11) NOT NULL,
   `doctor_firstName` text NOT NULL,
-  `doctor_lastName` text NOT NULL
+  `doctor_lastName` text NOT NULL,
+  `doctor_creationDateTime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `doctors`
---
-
-INSERT INTO `doctors` (`doctor_ID`, `doctor_firstName`, `doctor_lastName`) VALUES
-(1, 'Juan', 'Bozo'),
-(2, 'Danny', 'Moran');
 
 -- --------------------------------------------------------
 
@@ -78,15 +64,6 @@ CREATE TABLE `patients` (
   `patient_surgeryState_ID` int(11) NOT NULL,
   `patient_isDischarged` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `patients`
---
-
-INSERT INTO `patients` (`patient_ID`, `patient_fullName`, `patient_yearsOld`, `patient_sugeryDate`, `patient_surgeryTime`, `patient_surgeryRoom`, `patient_doctor_ID`, `patient_diagnosis_ID`, `patient_surgeryState_ID`, `patient_isDischarged`) VALUES
-(12, 'HECTOR LUIS NAVARRO', 30, '11/02/2025', '10:00:00', 3, 2, 2, 4, 1),
-(14, 'HECTOR NAVARRO', 25, '11/02/2025', '13:00:00', 1, 2, 2, 3, 0),
-(15, 'HECTOR NAVARRO', 27, '11/02/2025', '10:10:00', 5, 2, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -196,19 +173,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `diagnosis`
 --
 ALTER TABLE `diagnosis`
-  MODIFY `diagnosis_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `diagnosis_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `doctor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `doctor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patient_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `patient_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `patient_states`

@@ -57,7 +57,7 @@ function ajaxAlert(alert) {
     }).then((result) => {
       if (result.isConfirmed) {
         location.reload();
-      }
+      } 
     });
   } else if (alert.type == "clean") {
     Swal.fire({

@@ -21,8 +21,10 @@ if (isset($_GET['views'])) {
     <?php
         use app\controllers\viewsController;
         use app\controllers\patientsController;
+        use app\controllers\doctorsController;
 
         $instacePatients = new patientsController();
+        $instanceDoctors = new doctorsController();
 
         $viewsController = new viewsController();
         $obtainViews = $viewsController->obtainViewsController($url[0]);

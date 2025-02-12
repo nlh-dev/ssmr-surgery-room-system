@@ -14,21 +14,12 @@
       <!-- Dropdown menu -->
       <div class="justify-end z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm" id="user-dropdown">
         <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900">Bonnie Green</span>
-          <span class="block text-sm  text-gray-500 truncate">name@flowbite.com</span>
+          <span class="block text-sm text-gray-900">Nombre de Usuario</span>
+          <span class="block text-sm  text-gray-500 truncate">Rol: Rol de Usuario</span>
         </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
+        <ul class="py-2 border-t border-gray-300" aria-labelledby="user-menu-button">
           <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Earnings</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300">Cerrar Sesión</a>
           </li>
         </ul>
       </div>
@@ -40,21 +31,24 @@
       </button>
     </div>
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100  rounded-lg bg-gray-900 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100  rounded-lg bg-gray-900 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900">Inicio</a>
+          <a href="<?= APPURL?>dashboard/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Inicio</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900">Pacientes</a>
+          <a href="<?= APPURL?>patients/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Pacientes</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900">Pacientes Previos</a>
+          <a href="<?= APPURL?>previousPatients/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Pacientes Previos</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900">Doctores</a>
+          <a href="<?= APPURL?>doctors/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Médicos</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900">Diagnosticos</a>
+          <a href="<?= APPURL?>diagnosis/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Diagnosticos</a>
+        </li>
+        <li>
+          <a href="<?= APPURL?>users/" class="block py-2 px-3 text-white rounded-sm md:hover:bg-transparent md:hover:text-blue-700 md:p-0 bg-gray-900 transition duration-100">Usuarios</a>
         </li>
       </ul>
     </div>
