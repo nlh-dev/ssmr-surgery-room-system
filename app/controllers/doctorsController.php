@@ -105,6 +105,7 @@ class doctorsController extends mainModel
                 <table class="w-full text-sm text-left text-white">
                     <thead class="text-xs text-white text-center bg-gray-900">
                         <tr>
+                            <th scope="col" class="px-6 py-3 uppercase">#</th>
                             <th scope="col" class="px-6 py-3 uppercase">Nombre y Apellido del Médico</th>
                             <th scope="col" class="px-6 py-3 uppercase">Hora y Fecha de Creación</th>';
         if ($total >= 1) {
@@ -119,6 +120,7 @@ class doctorsController extends mainModel
             foreach ($data as $rows) {
                 $table .= '
                         <tr class="bg-white border-b text-gray-900 border-gray-200 text-center hover:bg-gray-200 transition duration-100">
+                            <td class="text-gray-500">'.$counter.'</td>
                             <td class="px-6 py-4 font-bold whitespace-nowrap uppercase">
                                 Dr(a). ' . $rows['doctor_firstName'] . ' ' . $rows['doctor_lastName'] . '
                             </td>
