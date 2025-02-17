@@ -1,0 +1,2 @@
+<?php
+    $instanceLogin -> singOutController();

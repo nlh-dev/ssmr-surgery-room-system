@@ -14,30 +14,44 @@ if (isset($_GET['views'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <?php require_once "./app/views/includes/head.php";?>
+    <?php require_once "./app/views/includes/head.php"; ?>
 </head>
+
 <body>
     <?php
-        use app\controllers\viewsController;
-        use app\controllers\patientsController;
-        use app\controllers\doctorsController;
 
-        $instacePatients = new patientsController();
-        $instanceDoctors = new doctorsController();
+    use app\controllers\loginController;
+    use app\controllers\viewsController;
+    use app\controllers\patientsController;
+    use app\controllers\doctorsController;
+    use app\controllers\diagnosisController;
+    use app\controllers\usersController;
 
-        $viewsController = new viewsController();
-        $obtainViews = $viewsController->obtainViewsController($url[0]);
 
-        if ($obtainViews == "login" || $obtainViews == "404") {
-            require_once "./app/views/content/".$obtainViews.".php";
-            
-        } else {
-            require_once $obtainViews;
-            require_once "./app/views/layout/navbar.php";
+    $instanceLogin = new loginController();
+    $instanceUsers = new usersController();
+    $instanceDiagnosis = new diagnosisController();
+    $instacePatients = new patientsController();
+    $instanceDoctors = new doctorsController();
+
+    $viewsController = new viewsController();
+    $obtainViews = $viewsController->obtainViewsController($url[0]);
+
+    if ($obtainViews == "login" || $obtainViews == "404") {
+        require_once "./app/views/content/" . $obtainViews . ".php";
+    } else {
+        //LOG OUT SESSION
+        if ((!isset($_SESSION['ID']) || $_SESSION['ID'] == "") || (!isset($_SESSION['userName']) || $_SESSION['userName'] == "")) {
+            $instanceLogin->singOutController();
         }
+        require_once $obtainViews;
+        require_once "./app/views/layout/navbar.php";
+    }
 
-        require_once "./app/views/includes/scripts.php";
-        ?>
+    require_once "./app/views/includes/scripts.php";
+    ?>
 </body>
+
 </html>

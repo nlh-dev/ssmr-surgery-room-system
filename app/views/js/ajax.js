@@ -76,22 +76,22 @@ function ajaxAlert(alert) {
   }
 }
 
-// let exitButton = document.getElementById("logoutButton");
-// exitButton.addEventListener("click", function (e) {
-//   e.preventDefault();
+let exitButton = document.getElementById("logoutButton");
+exitButton.addEventListener("click", function (e) {
+  e.preventDefault();
 
-//   Swal.fire({
-//     title: "¿Deseas salir del Sistema?",
-//     icon: "question",
-//     showCancelButton: true,
-//     confirmButtonColor: "#3085d6",
-//     cancelButtonColor: "#d33",
-//     confirmButtonText: "Aceptar",
-//     cancelButtonText: "Cancelar",
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       let url = this.getAttribute("href");
-//       window.location.href = url;
-//     }
-//   });
-// });
+  Swal.fire({
+    title: "¿Deseas salir del Sistema?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Aceptar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let url = this.getAttribute("href");
+      window.location.href = url;
+    }
+  });
+});

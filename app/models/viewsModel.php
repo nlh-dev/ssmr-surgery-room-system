@@ -5,6 +5,7 @@
 
         protected function obtainViewsModel($obtainViews){
             $viewsList = [
+                "logout",
                 "dashboard",
                 "users",
                 "addUsers",
