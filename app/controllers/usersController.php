@@ -154,7 +154,7 @@ class usersController extends mainModel
 
         $numPages = ceil($total / $register);
 
-        $table .= '<div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-3">
+        $table .= '<div class="relative overflow-x-hidden shadow-md sm:rounded-lg my-4">
                             <table class="w-full text-sm text-left text-white">
                                 <thead class="text-xs text-white text-center bg-gray-900">
                                     <tr class="uppercase">
@@ -186,12 +186,12 @@ class usersController extends mainModel
             foreach ($data as $rows) {
                 $table .= '
                         <tr class="bg-white border-b text-gray-900 border-gray-200 text-center hover:bg-gray-200 transition duration-100">
-                            <td class="px-6 py-3 uppercase"> ' . $counter . ' </td>
-                            <td class="px-6 py-3 font-medium text-gray-900 uppercase text-left">' . $rows['user_firstName'] . ' ' . $rows['user_lastName'] . ' </td>
-                            <td class="px-6 py-3">' . $rows['user_userName'] . '</td>
-                            <td class="px-6 py-3">' . $rows['user_userPassword'] . '</td>
-                            <td class="px-6 py-3">' . $rows['role_Name'] . '</td>
-                            <td class="px-6 py-3 text-center">
+                            <td class="px-6 py-4 uppercase"> ' . $counter . ' </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 uppercase text-left">' . $rows['user_firstName'] . ' ' . $rows['user_lastName'] . ' </td>
+                            <td class="px-6 py-4">' . $rows['user_userName'] . '</td>
+                            <td class="px-6 py-4">' . $rows['user_userPassword'] . '</td>
+                            <td class="px-6 py-4">' . $rows['role_Name'] . '</td>
+                            <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center items-center">
                                 <a href="' . APPURL . 'updateUsers/' . $rows['user_ID'] . '/" class="bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-full text-base p-2.5 text-center inline-flex items-center me-2">
                                     <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
