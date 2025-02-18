@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-02-2025 a las 20:48:33
+-- Tiempo de generación: 18-02-2025 a las 16:23:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -122,6 +122,15 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`user_ID`, `user_firstName`, `user_lastName`, `user_userName`, `user_userPassword`, `user_role_ID`) VALUES
+(1, 'USUARIO', 'ADMINISTRADOR', 'Administrador', 'HospitalAdmin99', 1),
+(2, 'QUIROFANO', 'SSMR', 'quirofano', 'ssquirofano', 2),
+(3, 'VISTA', 'SSMR', 'usuario', 'ssusuario', 3);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -179,7 +188,7 @@ ALTER TABLE `diagnosis`
 -- AUTO_INCREMENT de la tabla `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `doctor_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `doctor_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `patients`
@@ -203,7 +212,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
