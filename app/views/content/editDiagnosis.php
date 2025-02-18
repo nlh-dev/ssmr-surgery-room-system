@@ -24,11 +24,7 @@
                     <h1 class="text-strong text-xl font-bold text-gray-800">Información del Diagnostico</h1>
                 </div>
                 <div>
-                    <button type="reset" class="ml-2 text-white bg-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3" />
-                        </svg>
-                    </button>
+                <?php require_once "./app/views/components/buttons/returnButton.php"; ?>
                 </div>
             </div>
 
