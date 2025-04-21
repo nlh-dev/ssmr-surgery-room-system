@@ -3,6 +3,7 @@
 use app\controllers\patientsController;
 
 $patients = new patientsController();
+$showPatientsYearType = $patients->getPatientYearTypeController();
 $showPatientStates = $patients->getPatientStatesController();
 $showDiagnosis = $patients->getDiagnosisController();
 $showDoctors = $patients->getDoctorsController();
@@ -29,7 +30,7 @@ $showDoctors = $patients->getDoctorsController();
             <!-- Modal body -->
             <form action="<?= APPURL ?>app/ajax/patientsAjax.php" class="AjaxForm" method="POST" autocomplete="OFF">
                 <input type="hidden" name="patientsModule" id="patientsModule" value="addPatients">
-                <div class="p-4 md:p-5 space-y-4 bg-white grid grid-cols-5 gap-5">
+                <div class="p-4 md:p-5 space-y-4 bg-white grid grid-cols-6 gap-5">
                     <div class="col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Nombre del Paciente</label>
                         <div class="relative my-2">
@@ -54,6 +55,17 @@ $showDoctors = $patients->getDoctorsController();
                         </div>
                     </div>
 
+                    <div class="">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Años / Meses</label>
+                        <select id="patientYearType" name="patientYearType" class="block w-full p-2 mb-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500">
+                            <option selected value="">Seleccione....</option>
+                            <?php foreach ($showPatientsYearType as $key => $showPatientsYearTypeValue) { ?>
+                                <option value="<?= $showPatientsYearTypeValue['yearType_ID'] ?>">
+                                    <?= $showPatientsYearTypeValue['yearType_Name'] ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900">Fecha de Cirugía</label>
                         <div class="relative max-w-sm">
@@ -74,14 +86,14 @@ $showDoctors = $patients->getDoctorsController();
                                     <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input type="time" id="surgeryTime" name="surgeryTime" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
+                            <input type="time" id="surgeryTime" name="surgeryTime" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                         </div>
                     </div>
 
                     <div class="col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Doctor a cargo de Cirugía</label>
                         <select id="surgeryDoctor" name="surgeryDoctor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                            <option selected>Seleccione....</option>
+                            <option selected value="">Seleccione....</option>
                             <?php foreach ($showDoctors as $key => $showDoctorsValue) { ?>
                                 <option value="<?= $showDoctorsValue['doctor_ID'] ?>"><?= $showDoctorsValue['doctor_firstName'] ?> <?= $showDoctorsValue['doctor_lastName'] ?></option>
                             <?php } ?>
@@ -98,7 +110,7 @@ $showDoctors = $patients->getDoctorsController();
                         </select>
                     </div>
 
-                    <div>
+                    <div class="col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Número de Sala</label>
                         <div class="relative my-2">
                             <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -111,11 +123,11 @@ $showDoctors = $patients->getDoctorsController();
                         </div>
                     </div>
 
-                    <div class="col-span-2">
+                    <div class="col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Estado del Paciente</label>
                         <select id="patientState" name="patientState" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option selected value="">Seleccione....</option>
-                            <?php foreach ($showPatientStates as $key => $patientStatesValue) { 
+                            <?php foreach ($showPatientStates as $key => $patientStatesValue) {
                                 if ($patientStatesValue['patientsState_ID'] != 4) { ?>
                                     <option value="<?= $patientStatesValue['patientsState_ID'] ?>"><?= $patientStatesValue['patientsState_Name'] ?></option>
                                 <?php } ?>

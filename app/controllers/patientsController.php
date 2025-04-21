@@ -9,6 +9,13 @@ use app\models\mainModel;
 class patientsController extends mainModel
 {
 
+    public function getPatientYearTypeController(){
+        $getPatientYearType_Query = "SELECT * FROM years_type";
+        $getPatientYearType_SQL = $this->dbRequestExecute($getPatientYearType_Query);
+        $getPatientYearType_SQL->execute();
+        return $getPatientYearType_SQL;
+    }
+    
     public function getPatientStatesController(){
         $getPatientStates_Query = "SELECT * FROM patient_states";
         $getPatientStates_SQL = $this->dbRequestExecute($getPatientStates_Query);
@@ -34,6 +41,7 @@ class patientsController extends mainModel
     public function addPatientsController(){
         $patientFullName = strtoupper($this->cleanRequest($_POST['patientFullName']));
         $patientYearsOld = $this->cleanRequest($_POST['patientYearsOld']);
+        $patientYearType = $this->cleanRequest($_POST['patientYearType']);
         $surgeryDate = $this->cleanRequest($_POST['surgeryDate']);
         $surgeryTime = $this->cleanRequest($_POST['surgeryTime']);
         $surgeryDoctor = $this->cleanRequest($_POST['surgeryDoctor']);
@@ -41,7 +49,7 @@ class patientsController extends mainModel
         $surgeryRoomNumber = $this->cleanRequest($_POST['surgeryRoomNumber']);
         $patientState = $this->cleanRequest($_POST['patientState']);
 
-        if (empty($patientFullName) || empty($patientYearsOld) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber) || empty($patientState)) {
+        if (empty($patientFullName) || empty($patientYearsOld) || empty($patientYearType) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber) || empty($patientState)) {
             $alert = [
                 "type" => "simple",
                 "icon" => "warning",
@@ -63,6 +71,11 @@ class patientsController extends mainModel
                 "db_FieldName" => "patient_yearsOld",
                 "db_ValueName" => ":yearsOld",
                 "db_realValue" => $patientYearsOld
+            ],
+            [
+                "db_FieldName" => "patient_yearType_ID",
+                "db_ValueName" => ":yearType",
+                "db_realValue" => $patientYearType
             ],
             [
                 "db_FieldName" => "patient_sugeryDate",
@@ -168,6 +181,7 @@ class patientsController extends mainModel
 
         $patientFullName = strtoupper($this->cleanRequest($_POST['patientFullName']));
         $patientYearsOld = $this->cleanRequest($_POST['patientYearsOld']);
+        $patientYearType = $this->cleanRequest($_POST['patientYearType']);
         $surgeryDate = $this->cleanRequest($_POST['surgeryDate']);
         $surgeryTime = $this->cleanRequest($_POST['surgeryTime']);
         $surgeryDoctor = $this->cleanRequest($_POST['surgeryDoctor']);
@@ -175,7 +189,7 @@ class patientsController extends mainModel
         $surgeryRoomNumber = $this->cleanRequest($_POST['surgeryRoomNumber']);
         $patientState = $this->cleanRequest($_POST['patientState']);
 
-        if (empty($patientFullName) || empty($patientYearsOld) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber) || empty($patientState)) {
+        if (empty($patientFullName) || empty($patientYearsOld) || empty($patientYearType) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber) || empty($patientState)) {
             $alert = [
                 "type" => "simple",
                 "icon" => "warning",
@@ -196,6 +210,11 @@ class patientsController extends mainModel
                 "db_FieldName" => "patient_yearsOld",
                 "db_ValueName" => ":yearsOld",
                 "db_realValue" => $patientYearsOld
+            ],
+            [
+                "db_FieldName" => "patient_yearType_ID",
+                "db_ValueName" => ":yearType",
+                "db_realValue" => $patientYearType
             ],
             [
                 "db_FieldName" => "patient_sugeryDate",
@@ -272,6 +291,7 @@ class patientsController extends mainModel
 
         $patientFullName = strtoupper($this->cleanRequest($_POST['patientFullName']));
         $patientYearsOld = $this->cleanRequest($_POST['patientYearsOld']);
+        $patientYearType = $this->cleanRequest($_POST['patientYearType']);
         $surgeryDate = $this->cleanRequest($_POST['surgeryDate']);
         $surgeryTime = $this->cleanRequest($_POST['surgeryTime']);
         $surgeryDoctor = $this->cleanRequest($_POST['surgeryDoctor']);
@@ -279,7 +299,7 @@ class patientsController extends mainModel
         $surgeryRoomNumber = $this->cleanRequest($_POST['surgeryRoomNumber']);
         
 
-        if (empty($patientFullName) || empty($patientYearsOld) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber)) {
+        if (empty($patientFullName) || empty($patientYearsOld) || empty($patientYearType) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber)) {
             $alert = [
                 "type" => "simple",
                 "icon" => "warning",
@@ -300,6 +320,11 @@ class patientsController extends mainModel
                 "db_FieldName" => "patient_yearsOld",
                 "db_ValueName" => ":yearsOld",
                 "db_realValue" => $patientYearsOld
+            ],
+            [
+                "db_FieldName" => "patient_yearType_ID",
+                "db_ValueName" => ":yearType",
+                "db_realValue" => $patientYearType
             ],
             [
                 "db_FieldName" => "patient_sugeryDate",
@@ -424,8 +449,10 @@ class patientsController extends mainModel
         JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
         JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
         JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
         WHERE (patient_fullName LIKE '%$search%'
         OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
         OR patient_sugeryDate LIKE '%$search%'
         OR patient_surgeryTime LIKE '%$search%'
         OR patient_surgeryRoom LIKE '%$search%'
@@ -440,8 +467,10 @@ class patientsController extends mainModel
         JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
         JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
         JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
         WHERE (patient_fullName LIKE '%$search%'
         OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
         OR patient_sugeryDate LIKE '%$search%'
         OR patient_surgeryTime LIKE '%$search%'
         OR patient_surgeryRoom LIKE '%$search%'
@@ -483,7 +512,10 @@ class patientsController extends mainModel
                 $table .= '
                         <tr class="bg-white border-b text-gray-900 border-gray-200 text-center hover:bg-gray-200 transition duration-100">
                         <td class="px-6 py-4 font-bold whitespace-nowrap uppercase">' . $rows['patient_fullName'] . '</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['patient_yearsOld'] . ' Años</td>
+                        <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">
+                        ' . $rows['patient_yearsOld'] . '
+                        ' . $rows['yearType_Name'] . '
+                        </td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['patient_sugeryDate'] . ' - ' . date('h:i A', strtotime($rows['patient_surgeryTime'])) . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">#' . $rows['patient_surgeryRoom'] . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['doctor_firstName'] . ' ' . $rows['doctor_lastName'] . '</td>
@@ -603,8 +635,10 @@ class patientsController extends mainModel
         JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
         JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
         JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
         WHERE (patient_fullName LIKE '%$search%'
         OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
         OR patient_sugeryDate LIKE '%$search%'
         OR patient_surgeryTime LIKE '%$search%'
         OR patient_surgeryRoom LIKE '%$search%'
@@ -619,8 +653,10 @@ class patientsController extends mainModel
         JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
         JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
         JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
         WHERE (patient_fullName LIKE '%$search%'
         OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
         OR patient_sugeryDate LIKE '%$search%'
         OR patient_surgeryTime LIKE '%$search%'
         OR patient_surgeryRoom LIKE '%$search%'
@@ -662,7 +698,8 @@ class patientsController extends mainModel
                 $table .= '
                         <tr class="bg-white border-b text-gray-900 border-gray-200 text-center hover:bg-gray-200 transition duration-100">
                         <td class="px-6 py-4 font-bold whitespace-nowrap uppercase">' . $rows['patient_fullName'] . '</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['patient_yearsOld'] . ' Años</td>
+                        <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">
+                        ' . $rows['patient_yearsOld'] . ' ' . $rows['yearType_Name'] . ' </td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['patient_sugeryDate'] . ' - ' . date('h:i A', strtotime($rows['patient_surgeryTime'])) . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">#' . $rows['patient_surgeryRoom'] . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['doctor_firstName'] . ' ' . $rows['doctor_lastName'] . '</td>
