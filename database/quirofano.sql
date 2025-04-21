@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2025 a las 16:23:45
+-- Tiempo de generación: 21-04-2025 a las 17:50:45
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -56,6 +56,7 @@ CREATE TABLE `patients` (
   `patient_ID` int(11) NOT NULL,
   `patient_fullName` text NOT NULL,
   `patient_yearsOld` int(11) NOT NULL,
+  `patient_yearType_ID` int(11) NOT NULL,
   `patient_sugeryDate` text NOT NULL,
   `patient_surgeryTime` time NOT NULL,
   `patient_surgeryRoom` int(11) NOT NULL,
@@ -130,6 +131,25 @@ INSERT INTO `users` (`user_ID`, `user_firstName`, `user_lastName`, `user_userNam
 (2, 'QUIROFANO', 'SSMR', 'quirofano', 'ssquirofano', 2),
 (3, 'VISTA', 'SSMR', 'usuario', 'ssusuario', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `years_type`
+--
+
+CREATE TABLE `years_type` (
+  `yearType_ID` int(11) NOT NULL,
+  `yearType_Name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `years_type`
+--
+
+INSERT INTO `years_type` (`yearType_ID`, `yearType_Name`) VALUES
+(1, 'Años'),
+(2, 'Meses');
+
 --
 -- Índices para tablas volcadas
 --
@@ -153,7 +173,8 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`patient_ID`),
   ADD KEY `patient_doctor_ID` (`patient_doctor_ID`,`patient_diagnosis_ID`,`patient_surgeryState_ID`),
   ADD KEY `patient_diagnosis_ID` (`patient_diagnosis_ID`),
-  ADD KEY `patient_surgeryState_ID` (`patient_surgeryState_ID`);
+  ADD KEY `patient_surgeryState_ID` (`patient_surgeryState_ID`),
+  ADD KEY `patient_yearType_ID` (`patient_yearType_ID`);
 
 --
 -- Indices de la tabla `patient_states`
@@ -173,6 +194,12 @@ ALTER TABLE `roles`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_ID`),
   ADD KEY `user_role_ID` (`user_role_ID`);
+
+--
+-- Indices de la tabla `years_type`
+--
+ALTER TABLE `years_type`
+  ADD PRIMARY KEY (`yearType_ID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -215,6 +242,12 @@ ALTER TABLE `users`
   MODIFY `user_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `years_type`
+--
+ALTER TABLE `years_type`
+  MODIFY `yearType_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -224,7 +257,8 @@ ALTER TABLE `users`
 ALTER TABLE `patients`
   ADD CONSTRAINT `patients_ibfk_1` FOREIGN KEY (`patient_diagnosis_ID`) REFERENCES `diagnosis` (`diagnosis_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `patients_ibfk_2` FOREIGN KEY (`patient_surgeryState_ID`) REFERENCES `patient_states` (`patientsState_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `patients_ibfk_3` FOREIGN KEY (`patient_doctor_ID`) REFERENCES `doctors` (`doctor_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `patients_ibfk_3` FOREIGN KEY (`patient_doctor_ID`) REFERENCES `doctors` (`doctor_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `patients_ibfk_4` FOREIGN KEY (`patient_yearType_ID`) REFERENCES `years_type` (`yearType_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `users`
