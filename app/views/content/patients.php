@@ -35,7 +35,7 @@
                 echo $instancePatients ->patientsListController($url[1], 10, $url[0], "");
                 break;
             case 3:
-                echo $instancePatients->patientsListCardsController($url[1], 10, $url[0], "");
+                echo $instancePatients->patientsListCardsController($url[1], 8, $url[0], "");
                 break;
         }
         ?>
