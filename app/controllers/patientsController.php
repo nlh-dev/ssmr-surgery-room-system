@@ -39,7 +39,7 @@ class patientsController extends mainModel
     }
 
     public function addPatientsController(){
-        $patientFullName = strtoupper($this->cleanRequest($_POST['patientFullName']));
+        $patientFullName = ucwords($this->cleanRequest($_POST['patientFullName']));
         $patientYearsOld = $this->cleanRequest($_POST['patientYearsOld']);
         $patientYearType = $this->cleanRequest($_POST['patientYearType']);
         $surgeryDate = $this->cleanRequest($_POST['surgeryDate']);
@@ -297,7 +297,7 @@ class patientsController extends mainModel
         $surgeryDoctor = $this->cleanRequest($_POST['surgeryDoctor']);
         $surgeryDiagnosis = $this->cleanRequest($_POST['surgeryDiagnosis']);
         $surgeryRoomNumber = $this->cleanRequest($_POST['surgeryRoomNumber']);
-        
+        $patientState = $this->cleanRequest($_POST['patientState']);
 
         if (empty($patientFullName) || empty($patientYearsOld) || empty($patientYearType) || empty($surgeryTime) || empty($surgeryDate) || empty($surgeryDoctor) || empty($surgeryDiagnosis) || empty($surgeryRoomNumber)) {
             $alert = [
@@ -350,6 +350,11 @@ class patientsController extends mainModel
                 "db_FieldName" => "patient_diagnosis_ID",
                 "db_ValueName" => ":diagnosisID",
                 "db_realValue" => $surgeryDiagnosis
+            ],
+            [
+                "db_FieldName" => "patient_surgeryState_ID",
+                "db_ValueName" => ":surgeryStateID",
+                "db_realValue" => $patientState
             ],
         ];
 
@@ -519,7 +524,7 @@ class patientsController extends mainModel
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['patient_sugeryDate'] . ' - ' . date('h:i A', strtotime($rows['patient_surgeryTime'])) . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">#' . $rows['patient_surgeryRoom'] . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['doctor_firstName'] . ' ' . $rows['doctor_lastName'] . '</td>
-                        <td class="px-6 py-4 whitespace-nowrap font-bold uppercase">' . $rows['diagnosis_TypeName'] . '</td>
+                        <td class="px-6 py-4 whitespace-normal font-bold uppercase text-justify">' . $rows['diagnosis_TypeName'] . '</td>
                         <td class="px-6 py-4 whitespace-nowrap font-bold uppercase text-center">';
                 if ($rows['patientsState_ID'] == 1) {
                     $table .= '
@@ -777,5 +782,92 @@ class patientsController extends mainModel
         }
 
         return $table;
+    }
+
+    // Listar pacientes en formato de carta
+    public function patientsListCardsController($page, $register, $url, $search) {
+        $page = $this->cleanRequest($page);
+        $register = $this->cleanRequest($register);
+        $url = $this->cleanRequest($url);
+        $url = APPURL . $url . "/";
+        $search = $this->cleanRequest($search);
+        $cards = "";
+
+        $page = (isset($page) && $page > 0) ? (int) $page : 1;
+        $start = ($page > 0) ? (($page * $register) - $register) : 0;
+
+        $dataRequest_Query = "SELECT * FROM patients
+        JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
+        JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
+        JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
+        WHERE (patient_fullName LIKE '%$search%'
+        OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
+        OR patient_sugeryDate LIKE '%$search%'
+        OR patient_surgeryTime LIKE '%$search%'
+        OR patient_surgeryRoom LIKE '%$search%'
+        OR patient_doctor_ID LIKE '%$search%'
+        OR patient_diagnosis_ID LIKE '%$search%'
+        OR patient_surgeryState_ID LIKE '%$search%')
+        AND patient_isDischarged = 0
+        ORDER BY patient_sugeryDate, patient_surgeryTime 
+        DESC LIMIT $start,$register";
+
+        $data = $this->dbRequestExecute($dataRequest_Query);
+        $data = $data->fetchAll();
+
+        if (count($data) === 0) {
+            $cards .= '<div class="w-full flex justify-center items-center my-8">
+                <div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow-md text-center">
+                    <h2 class="text-2xl font-bold text-gray-700">No se encontraron registros</h2>
+                </div>
+            </div>';
+            return $cards;
+        }
+
+        $cards .= '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">';
+        foreach ($data as $row) {
+            // Estado: color
+            $stateColor = 'bg-gray-500';
+            if ($row['patientsState_ID'] == 1) $stateColor = 'bg-yellow-500';
+            elseif ($row['patientsState_ID'] == 2) $stateColor = 'bg-green-500';
+            elseif ($row['patientsState_ID'] == 3) $stateColor = 'bg-red-600';
+            
+            $cards .= '<div class="block max-w-xl p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                        '. ucwords($row['patient_fullName']) . ', ' . $row['patient_yearsOld'] . ' ' . $row['yearType_Name'] .'
+                        </h5>
+                    </div>
+                    <div class="h-4 w-4 rounded-full ' . $stateColor . '"></div>
+                </div>
+                <div>
+                    <div class="flex items-center">
+                        <div class="h-2 w-2 rounded-full bg-blue-500 me-2"></div>
+                        <p class="font-normal text-gray-700 font-semibold">
+                        N° de Sala: #' . $row['patient_surgeryRoom'] . '
+                        </p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="h-2 w-2 rounded-full bg-blue-500 me-2"></div>
+                        <p class="font-normal text-gray-700 font-semibold">
+                        Doctor(a): ' . $row['doctor_firstName'] . ' ' . $row['doctor_lastName'] . '</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="h-2 w-2 rounded-full bg-blue-500 me-2"></div>
+                        <p class="font-normal text-gray-700 font-semibold">
+                        Fecha de Cirugía: ' . $row['patient_sugeryDate'] . ', ' . date('h:i A', strtotime($row['patient_surgeryTime'])) . '</p>
+                    </div>
+                </div>
+                <div class="w-full mt-2">
+                    <p class="font-semibold">Diagnostico:</p>
+                    <p class="font-semibold text-lg text-justify">' . $row['diagnosis_TypeName'] . '</p>
+                </div>
+            </div>';
+        }
+        $cards .= '</div>';
+        return $cards;
     }
 }

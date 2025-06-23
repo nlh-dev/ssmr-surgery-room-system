@@ -24,7 +24,7 @@
             </nav>
         <?php } else { ?>
             <!-- Breadcrumb -->
-            <nav class="flex justify-between" aria-label="Breadcrumb">
+            <nav class="flex items-center justify-between" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center mb-3 sm:mb-0">
                     <li>
                         <div class="flex items-center">
@@ -34,6 +34,23 @@
                             <p class="px-3 text-lg font-medium text-gray-900">
                                 Lista de Pacientes
                             </p>
+                        </div>
+                    </li>
+                </ol>
+                <ol>
+                    <li class="flex items-center space-x-2">
+                        <p class="font-semibold">Leyenda:</p>
+                        <div class="flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-yellow-500 me-1"></div>
+                                <p class="text-yellow-500 font-semibold">En Espera</p>
+                        </div>
+                        <div class="flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-green-500 me-1"></div>
+                                <p class="text-green-500 font-semibold">En Cirugía</p>
+                        </div>
+                        <div class="flex items-center">
+                                <div class="h-4 w-4 rounded-full bg-red-600 me-1"></div>
+                                <p class="text-red-600 font-semibold">En Recuperación</p>
                         </div>
                     </li>
                 </ol>
