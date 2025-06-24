@@ -814,8 +814,29 @@ class patientsController extends mainModel
         ORDER BY patient_sugeryDate, patient_surgeryTime 
         DESC LIMIT $start,$register";
 
+        $totalData_Query = "SELECT COUNT(patient_ID) FROM patients
+        JOIN doctors ON patients.patient_doctor_ID = doctors.doctor_ID
+        JOIN diagnosis ON patients.patient_diagnosis_ID = diagnosis.diagnosis_ID
+        JOIN patient_states ON patients.patient_surgeryState_ID = patient_states.patientsState_ID
+        JOIN years_type ON patients.patient_yearType_ID = years_type.yearType_ID
+        WHERE (patient_fullName LIKE '%$search%'
+        OR patient_yearsOld LIKE '%$search%'
+        OR patient_yearType_ID LIKE '%$search%'
+        OR patient_sugeryDate LIKE '%$search%'
+        OR patient_surgeryTime LIKE '%$search%'
+        OR patient_surgeryRoom LIKE '%$search%'
+        OR patient_doctor_ID LIKE '%$search%'
+        OR patient_diagnosis_ID LIKE '%$search%'
+        OR patient_surgeryState_ID LIKE '%$search%')
+        AND patient_isDischarged = 0";
+
         $data = $this->dbRequestExecute($dataRequest_Query);
         $data = $data->fetchAll();
+
+        $total = $this->dbRequestExecute($totalData_Query);
+        $total = (int) $total->fetchColumn();
+
+        $numPages = ceil($total / $register);
 
         if (count($data) === 0) {
             $cards .= '<div class="w-full flex justify-center items-center my-8">
@@ -827,6 +848,8 @@ class patientsController extends mainModel
         }
 
         $cards .= '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">';
+        $counter = $start + 1;
+        $startPage = $start + 1;
         foreach ($data as $row) {
             // Estado: color
             $stateColor = 'bg-gray-500';
@@ -866,8 +889,22 @@ class patientsController extends mainModel
                     <p class="font-semibold text-lg text-justify">' . $row['diagnosis_TypeName'] . '</p>
                 </div>
             </div>';
+            $counter++;
         }
+        $finalPage = $counter - 1;
         $cards .= '</div>';
+
+        // Contador de registros y paginación
+        if ($total > 0 && $page <= $numPages) {
+            $cards .= '<div class="flex justify-end items-center mt-4">
+                            <p class="has-text-right">
+                                Mostrando de <strong>' . $startPage . '</strong> a <strong>' .  $finalPage . ' </strong> de un total de <strong> ' . $total . '</strong> registros
+                            </p>
+                        </div>';
+            if (isset($_SESSION['role']) && $_SESSION['role'] != 3) {
+                $cards .= $this->paginationData($page, $numPages, $url, 1);
+            }
+        }
         return $cards;
     }
 }
